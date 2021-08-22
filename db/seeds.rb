@@ -5,16 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+if ENV['VERSION'].present?
+  path = Rails.root.join('db', 'seeds', ENV['VERSION'])
+  raise 'Seed file not found by the provided identifier' unless File.exist?(path)
+  require path
+else
+  Device.create!(name: "ABJ-NM", category: 'balance', vendor: 'Kern').tap do |device|
+    device.channels.create! name: 'weight', unit: 'mg'
+  end
 
-Device.create!(name: "ABJ-NM", category: 'balance', vendor: 'Kern').tap do |device|
-  device.channels.create! name: 'weight', unit: 'mg'
-end
+  Device.create!(name: "Entris Series", category: 'balance', vendor: 'Sartorius').tap do |device|
+    device.channels.create! name: 'weight', unit: 'mg'
+  end
 
-Device.create!(name: "Entris Series", category: 'balance', vendor: 'Sartorius').tap do |device|
-  device.channels.create! name: 'weight', unit: 'mg'
-end
-
-Device.create!(name: "Hei-VAP", category: 'stirrer', vendor: 'Heidolph').tap do |device|
-  device.channels.create! name: 'rotation', unit: 'rpm'
-  device.channels.create! name: 'temperature', unit: 'C'
+  Device.create!(name: "Hei-VAP", category: 'stirrer', vendor: 'Heidolph').tap do |device|
+    device.channels.create! name: 'rotation', unit: 'rpm'
+    device.channels.create! name: 'temperature', unit: 'C'
+  end
 end
