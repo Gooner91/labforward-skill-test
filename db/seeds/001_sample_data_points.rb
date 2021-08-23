@@ -5,8 +5,13 @@
 
 Device.all.each do |device|
   channel = device.channels.sample
-  10.times do
-    DataPoint.create(channel: channel, value: rand(1.0..999.9))
+  minute_index = 0
+  10000.times do
+    minute_index += 1
+    DataPoint.create(channel: channel,
+                     value: rand(1.0..999.9),
+                     skip_broadcast: true,
+                     created_at: Time.now + minute_index.minutes)
   end
 end
 

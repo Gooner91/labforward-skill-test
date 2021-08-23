@@ -28,6 +28,15 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'responders'
 
+# For downsampling data
+gem 'rollups'
+
+# For scheduling cron tasks
+gem 'whenever', require: false
+
+# For rounding times
+gem 'rounding'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

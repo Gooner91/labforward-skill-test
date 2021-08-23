@@ -7,5 +7,9 @@ module Api
 
       respond_with data_points
     end
+
+    def downsampled
+
+    end
   end
 end
