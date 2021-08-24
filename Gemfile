@@ -28,9 +28,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'responders'
 
-# For downsampling data
-gem 'rollups'
-
 # For scheduling cron tasks
 gem 'whenever', require: false
 
