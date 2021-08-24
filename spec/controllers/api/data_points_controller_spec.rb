@@ -3,12 +3,14 @@
 require 'rails_helper'
 
 describe Api::DataPointsController, type: :controller do
-  let(:device){ create(:device) }
-  let(:channel){ create(:channel, device: device ) }
-  let!(:down_sampled_data){ create_list(:downsampled_datapoint,
-                                       100,
-                                       channel: channel,
-                                        value: rand(1.0..999.9)) }
+  let(:device) { create(:device) }
+  let(:channel) { create(:channel, device: device) }
+  let!(:down_sampled_data) do
+    create_list(:downsampled_datapoint, 100,
+                channel: channel,
+                value: rand(1.0..999.9))
+  end
+
   describe 'GET /api/data_points' do
     before do
       5.times do |index|
@@ -43,7 +45,7 @@ describe Api::DataPointsController, type: :controller do
     it 'returns appropriate attributes' do
       get :down_sampled, format: :json, params: { page: 1 }
       parsed_response = JSON.parse(response.body)['data']
-      expect(parsed_response.first["attributes"].keys)
+      expect(parsed_response.first['attributes'].keys)
         .to eq(%w[value time_interval interval channel_id])
     end
   end

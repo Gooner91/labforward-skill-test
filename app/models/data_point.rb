@@ -5,7 +5,7 @@ class DataPoint < ApplicationRecord
 
   attr_accessor :skip_broadcast
 
-  after_commit :broadcast, unless: Proc.new{ |data_point| data_point.skip_broadcast }
+  after_commit :broadcast, unless: proc { |data_point| data_point.skip_broadcast }
 
   private
 

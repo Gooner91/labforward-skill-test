@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module DataPoints
   class Rollup
-
     #
     # initialize
     # @params {Integer} interval
@@ -24,8 +25,8 @@ module DataPoints
           downsampled_data << { channel_id: channel_id,
                                 value: average.to_f,
                                 time_interval: time_upper_bound,
-                                created_at: Time.now,
-                                updated_at: Time.now }
+                                created_at: Time.now.utc,
+                                updated_at: Time.now.utc, }
         end
 
         @time_lower_bound += interval_in_minutes
@@ -39,7 +40,7 @@ module DataPoints
     # set_time_lower_bound
     #
     def set_time_lower_bound
-      unless DownsampledDatapoint.any?
+      if DownsampledDatapoint.blank?
         DataPoint.first.created_at.floor_to(interval_in_minutes)
       else
         last_logged_time = DownsampledDatapoint.last.time_interval
@@ -60,6 +61,5 @@ module DataPoints
     def interval_in_minutes
       @interval.minutes
     end
-
   end
 end
