@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :channels, only: %i[index]
     resources :data_points, only: %i[index] do
       collection do
-        get :downsampled
+        get :down_sampled
       end
     end
     resources :devices, only: %i[index]
