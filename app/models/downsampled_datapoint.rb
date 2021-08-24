@@ -3,5 +3,5 @@
 class DownsampledDatapoint < ApplicationRecord
   belongs_to :channel
 
-  enum interval: %w[5m 10m 15m]
+  enum interval: { '5m' => 0, '10m' => 1, '15m' => 2 }
 end

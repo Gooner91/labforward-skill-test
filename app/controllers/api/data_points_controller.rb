@@ -15,8 +15,8 @@ module Api
       down_sampled_data = DownsampledDatapoint.paginate(page: params[:page],
                                                         per_page: 20)
       render json: DataPoints::DownSampledDataSerializer
-                     .new(down_sampled_data)
-                     .serializable_hash
+        .new(down_sampled_data)
+        .serializable_hash
     end
   end
 end

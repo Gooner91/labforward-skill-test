@@ -26,7 +26,7 @@ module DataPoints
                                 value: average.to_f,
                                 time_interval: time_upper_bound,
                                 created_at: Time.now.utc,
-                                updated_at: Time.now.utc, }
+                                updated_at: Time.now.utc }
         end
 
         @time_lower_bound += interval_in_minutes
