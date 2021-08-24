@@ -40,11 +40,11 @@ module DataPoints
     # set_time_lower_bound
     #
     def set_time_lower_bound
-      if DownsampledDatapoint.blank?
-        DataPoint.first.created_at.floor_to(interval_in_minutes)
-      else
+      if DownsampledDatapoint.any?
         last_logged_time = DownsampledDatapoint.last.time_interval
         last_logged_time + interval_in_minutes
+      else
+        DataPoint.first.created_at.floor_to(interval_in_minutes)
       end
     end
 
