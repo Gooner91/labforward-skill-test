@@ -38,6 +38,10 @@ namespace :data_points do
     threads.map(&:join)
   end
 
+  task down_sample: :environment do
+    DataPoints::Rollup.new().call
+  end
+
   def wait_for_migration!
     loop do
       ActiveRecord::Migration.check_pending!

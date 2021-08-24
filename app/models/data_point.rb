@@ -3,7 +3,9 @@
 class DataPoint < ApplicationRecord
   belongs_to :channel
 
-  after_commit :broadcast
+  attr_accessor :skip_broadcast
+
+  after_commit :broadcast, unless: proc { |data_point| data_point.skip_broadcast }
 
   private
 
